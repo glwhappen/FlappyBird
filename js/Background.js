@@ -18,7 +18,7 @@
 		Game.ctx.fillStyle = "#4EC0CA";
 		Game.ctx.fillRect(0, 0, Game.canvas.width, this.y + 10);
 		Game.ctx.fillStyle = "#5EE270";
-		Game.ctx.fillRect(0, this.y + this.image.height, Game.canvas.width, Game.canvas.height - (this.y + this.image.height));
+		Game.ctx.fillRect(0, this.y + this.image.height - 10, Game.canvas.width, Game.canvas.height - (this.y + this.image.height) + 10);
 		
 		Game.ctx.restore();
 	}
