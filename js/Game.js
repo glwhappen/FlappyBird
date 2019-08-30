@@ -85,6 +85,12 @@
 	Game.prototype.start = function(){
 		//实例化背景
 		this.background = new Background();
+		//实例化大地
+		this.land = new Land();
+		
+		//实例化管子
+		this.pipe = new Pipe();
+		
 		var self = this;
 		this.timer = setInterval(function(){
 			//清屏
@@ -96,6 +102,14 @@
 			self.background.update();			
 			//渲染背景
 			self.background.render();
+			//更新大地
+			self.land.update();
+			//渲染大地
+			self.land.render();
+			//更新管子
+			self.pipe.update();
+			//渲染管子
+			self.pipe.render();
 
 			//打印帧编号
 			self.ctx.save();
