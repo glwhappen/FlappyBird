@@ -14,9 +14,9 @@
 	{"name" : "bird2_1", "url" : "img/bird2_1.png"},
 	{"name" : "bird2_2", "url" : "img/bird2_2.png"},
 	
-	{"name" : "bg_day", "url" : "img/bg_day.png"},
-	{"name" : "bg_day", "url" : "img/bg_day.png"},
-	{"name" : "bg_day", "url" : "img/bg_day.png"}
+	{"name" : "land", "url" : "img/land.png"},
+	{"name" : "Pipe_down", "url" : "img/Pipe_down.png"},
+	{"name" : "Pipe_up", "url" : "img/Pipe_up.png"}
 	
 	]
 }
