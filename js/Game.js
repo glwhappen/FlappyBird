@@ -19,6 +19,8 @@
 		this.loadAllResource(function(){
 			//我们封装的回调函数，这里表示全部资源读取完毕
 			self.start();
+			//绑定监听			
+			self.bindEvent();
 		});
 		
 	}
@@ -94,6 +96,9 @@
 		//管子数组，定时器每间隔150帧都要实例化管子
 		this.pipeArr = new Array();
 		
+		//小鸟的实例
+		this.bird = new Bird();
+		
 		var self = this;
 		this.timer = setInterval(function(){
 			//清屏
@@ -117,6 +122,9 @@
 				self.pipeArr[i].update();
 				self.pipeArr[i].render();
 			}
+			//渲染小鸟
+			self.bird.render();
+			self.bird.update();
 			
 
 			//打印帧编号
@@ -125,5 +133,11 @@
 			self.ctx.fillText("FNO:" + self.fno, 10, 20);
 			self.ctx.restore();
 		}, 20);
+	}
+	Game.prototype.bindEvent = function(){
+		var self = this;
+		this.canvas.onclick = function(){
+			self.bird.fly();
+		}
 	}
 })();
