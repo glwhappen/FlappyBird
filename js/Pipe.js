@@ -21,6 +21,12 @@
 	Pipe.prototype.update = function(){
 		this.x -= 2;
 		
+		if(Game.bird.R > this.x && Game.bird.L < this.x + 52){
+			if(Game.bird.T < this.height1 || Game.bird.B > this.height1 + this.interspace){
+				clearInterval(Game.timer); 
+			}
+		}
+		
 	}
 	Pipe.prototype.render = function(){
 		Game.ctx.drawImage(this.imageDown, 0, 320 - this.height1, this.imageDown.width, this.height1, this.x, 0, this.imageDown.width, this.height1);

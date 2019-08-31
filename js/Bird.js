@@ -9,7 +9,7 @@
 		}
 		//翅膀状态
 		this.wingStep = 0;
-		//小鸟的位置（注意这个位置是真实的物理位置）
+		//小鸟的位置（注意这个位置是真实的物理位置，并且是小鸟真实点的位置）
 		this.x = Game.canvas.width * (1 - 0.618) - 24;
 		this.y = 100;
 		
@@ -24,8 +24,10 @@
 	}
 	Bird.prototype.render = function(){
 		Game.ctx.save();
-		Game.ctx.translate(this.x - 24, this.y - 24);
+		//将坐标系拉到小鸟中心点
+		Game.ctx.translate(this.x, this.y);
 		Game.ctx.rotate(this.d);
+		
 		Game.ctx.drawImage(this.imageArr[this.wingStep], -24, -24);
 		
 		Game.ctx.restore();
@@ -51,6 +53,23 @@
 		
 		this.d += 0.04;
 		this.fno++;
+		
+		//验收天花板
+		if(this.y < -20)
+		{
+			this.y = -20;
+		}
+		
+		//计算自己四个碰撞检测值
+		this.T = this.y - 9; //12
+		this.R = this.x + 12; //17
+		this.B = this.y + 11; //12
+		this.L = this.x - 15; //17
+		// 验证是否落地
+		if(this.B > Game.canvas.height * Game.landScale){
+			clearInterval(Game.timer);
+		}
+		
 	}
 	//飞
 	Bird.prototype.fly = function(){
