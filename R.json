@@ -27,9 +27,26 @@
 	{"name" : "shuzi6", "url" : "img/font_054.png"},
 	{"name" : "shuzi7", "url" : "img/font_055.png"},
 	{"name" : "shuzi8", "url" : "img/font_056.png"},
-	{"name" : "shuzi9", "url" : "img/font_057.png"}
+	{"name" : "shuzi9", "url" : "img/font_057.png"},
 	
+	{"name" : "button_play", "url" : "img/button_play.png"},
+	{"name" : "tutorial", "url" : "img/tutorial.png"},
 	
+	{"name" : "bomb0", "url" : "img/bomb/0.png"},
+	{"name" : "bomb1", "url" : "img/bomb/1.png"},
+	{"name" : "bomb2", "url" : "img/bomb/2.png"},
+	{"name" : "bomb3", "url" : "img/bomb/3.png"},
+	{"name" : "bomb4", "url" : "img/bomb/4.png"},
+	{"name" : "bomb5", "url" : "img/bomb/5.png"},
+	{"name" : "bomb6", "url" : "img/bomb/6.png"},
+	{"name" : "bomb7", "url" : "img/bomb/7.png"},
+	{"name" : "bomb8", "url" : "img/bomb/8.png"},
+	{"name" : "bomb9", "url" : "img/bomb/9.png"},
+	{"name" : "bomb10", "url" : "img/bomb/10.png"},
+	{"name" : "bomb11", "url" : "img/bomb/11.png"},
 	
+	{"name" : "text_game_over", "url" : "img/text_game_over.png"},
+	
+	{"name" : "logo", "url" : "img/title.png"}
 	]
 }

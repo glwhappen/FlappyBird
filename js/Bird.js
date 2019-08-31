@@ -10,9 +10,10 @@
 		//翅膀状态
 		this.wingStep = 0;
 		//小鸟的位置（注意这个位置是真实的物理位置，并且是小鸟真实点的位置）
-		this.x = Game.canvas.width * (1 - 0.618) - 24;
-		this.y = 100;
-		
+		//this.x = Game.canvas.width * (1 - 0.618) - 24;
+		//this.y = 100;
+		this.x = Game.canvas.width / 2;
+		this.y = 300;
 		//鸟的帧数,用于下落上升算法
 		this.fno = 0;
 		
@@ -33,10 +34,10 @@
 		Game.ctx.restore();
 	}
 	Bird.prototype.update = function(){
-		Game.fno % 3 == 0 && this.wingStep++;
-		if(this.wingStep > 2){
-			this.wingStep = 0;
-		}
+		
+		this.wing();
+		
+
 		
 		//算法要求掉落
 		if(!this.hasEnergy){
@@ -67,7 +68,7 @@
 		this.L = this.x - 15; //17
 		// 验证是否落地
 		if(this.B > Game.canvas.height * Game.landScale){
-			clearInterval(Game.timer);
+			Game.sm.enter(4);
 		}
 		
 	}
@@ -77,5 +78,11 @@
 		this.d = -0.6;
 		this.fno = 0;
 	}
-	
+	//扑打翅膀
+	Bird.prototype.wing = function(){
+		Game.fno % 3 == 0 && this.wingStep++;
+		if(this.wingStep > 2){
+			this.wingStep = 0;
+		}
+	}
 })();

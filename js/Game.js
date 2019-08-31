@@ -22,8 +22,6 @@
 		this.loadAllResource(function(){
 			//我们封装的回调函数，这里表示全部资源读取完毕
 			self.start();
-			//绑定监听			
-			self.bindEvent();
 		});
 		
 	}
@@ -91,17 +89,25 @@
 	}
 	//开始游戏
 	Game.prototype.start = function(){
-		//实例化背景
-		this.background = new Background();
-		//实例化大地
-		this.land = new Land();
+//		//实例化背景
+//		this.background = new Background();
+//		//实例化大地
+//		this.land = new Land();
+//		
+//
+//		//管子数组，定时器每间隔150帧都要实例化管子
+//		this.pipeArr = new Array();
+//		
+//		//小鸟的实例
+//		this.bird = new Bird();
+		
+		
+		//实例化自己的场景管理器
+		this.sm = new SceneManager();
 		
 
-		//管子数组，定时器每间隔150帧都要实例化管子
-		this.pipeArr = new Array();
-		
-		//小鸟的实例
-		this.bird = new Bird();
+
+
 		
 		var self = this;
 		this.timer = setInterval(function(){
@@ -109,38 +115,41 @@
 			self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
 			//帧编号
 			self.fno++;
+			//场景管理器的渲染和更新
+			self.sm.update();
+			self.sm.render();
 
-			//更新背景
-			self.background.update();			
-			//渲染背景
-			self.background.render();
-			//更新大地
-			self.land.update();
-			//渲染大地
-			self.land.render();
-			if(self.fno % 150 == 0)
-			{
-				new Pipe();
-//				if(self.fno >= 200)
-//					self.score++;
-			}
-			//管子的更新和渲染
-			for(var i = 0; i < self.pipeArr.length; i++){
-				self.pipeArr[i].update();
-				//验证管子是否还在数组中
-				self.pipeArr[i] && self.pipeArr[i].render();
-			}
-			//渲染小鸟
-			self.bird.render();
-			self.bird.update();
-			
-			//打印分数
-			var scoreStr = self.score.toString();
-			var scoreLength = scoreStr.length;
-			
-			for(var i = 0; i < scoreLength; i++){
-				self.ctx.drawImage(self.R["shuzi" + scoreStr.charAt(i)], self.canvas.width / 2 - (scoreLength / 2 * 24) + 24 * i, 100);
-			}
+//			//更新背景
+//			self.background.update();			
+//			//渲染背景
+//			self.background.render();
+//			//更新大地
+//			self.land.update();
+//			//渲染大地
+//			self.land.render();
+//			if(self.fno % 150 == 0)
+//			{
+//				new Pipe();
+////				if(self.fno >= 200)
+////					self.score++;
+//			}
+//			//管子的更新和渲染
+//			for(var i = 0; i < self.pipeArr.length; i++){
+//				self.pipeArr[i].update();
+//				//验证管子是否还在数组中
+//				self.pipeArr[i] && self.pipeArr[i].render();
+//			}
+//			//渲染小鸟
+//			self.bird.render();
+//			self.bird.update();
+//			
+//			//打印分数
+//			var scoreStr = self.score.toString();
+//			var scoreLength = scoreStr.length;
+//			
+//			for(var i = 0; i < scoreLength; i++){
+//				self.ctx.drawImage(self.R["shuzi" + scoreStr.charAt(i)], self.canvas.width / 2 - (scoreLength / 2 * 24) + 24 * i, 100);
+//			}
 			
 			//var len = 2;
 			//self.ctx.drawImage(self.R["shuzi1"], self.canvas.width / 2 - (len / 2 * 34), 100);
@@ -152,13 +161,9 @@
 			self.ctx.save();
 			self.ctx.font = "16px consolas";
 			self.ctx.fillText("FNO:" + self.fno, 10, 20);
+			self.ctx.fillText("场景号:" + self.sm.sceneNumber, 10, 40);
 			self.ctx.restore();
 		}, 20);
 	}
-	Game.prototype.bindEvent = function(){
-		var self = this;
-		this.canvas.onclick = function(){
-			self.bird.fly();
-		}
-	}
+
 })();

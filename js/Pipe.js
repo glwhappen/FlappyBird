@@ -24,7 +24,7 @@
 		//碰撞检测，检测管子是否碰到小鸟
 		if(Game.bird.R > this.x && Game.bird.L < this.x + 52){
 			if(Game.bird.T < this.height1 || Game.bird.B > this.height1 + this.interspace){
-				clearInterval(Game.timer); 
+				Game.sm.enter(4);
 			}
 		}
 		//加分
