@@ -16,7 +16,20 @@
 	
 	{"name" : "land", "url" : "img/land.png"},
 	{"name" : "pipe_down", "url" : "img/pipe_down.png"},
-	{"name" : "pipe_up", "url" : "img/pipe_up.png"}
+	{"name" : "pipe_up", "url" : "img/pipe_up.png"},
+	
+	{"name" : "shuzi0", "url" : "img/font_048.png"},
+	{"name" : "shuzi1", "url" : "img/font_049.png"},
+	{"name" : "shuzi2", "url" : "img/font_050.png"},
+	{"name" : "shuzi3", "url" : "img/font_051.png"},
+	{"name" : "shuzi4", "url" : "img/font_052.png"},
+	{"name" : "shuzi5", "url" : "img/font_053.png"},
+	{"name" : "shuzi6", "url" : "img/font_054.png"},
+	{"name" : "shuzi7", "url" : "img/font_055.png"},
+	{"name" : "shuzi8", "url" : "img/font_056.png"},
+	{"name" : "shuzi9", "url" : "img/font_057.png"}
+	
+	
 	
 	]
 }

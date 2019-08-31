@@ -14,6 +14,9 @@
 		//设置画布的宽度和高度
 		this.init();
 		
+		//分数
+		this.score = 0;
+		
 		//读取资源，读取资源是一个异步函数，我们不知道他什么时候执行完毕，但是其他函数必须等到这个函数执行完毕才能执行，所以必须用回调函数
 		var self = this;
 		this.loadAllResource(function(){
@@ -93,6 +96,7 @@
 		//实例化大地
 		this.land = new Land();
 		
+
 		//管子数组，定时器每间隔150帧都要实例化管子
 		this.pipeArr = new Array();
 		
@@ -117,14 +121,31 @@
 			if(self.fno % 150 == 0)
 			{
 				new Pipe();
+//				if(self.fno >= 200)
+//					self.score++;
 			}
+			//管子的更新和渲染
 			for(var i = 0; i < self.pipeArr.length; i++){
 				self.pipeArr[i].update();
-				self.pipeArr[i].render();
+				//验证管子是否还在数组中
+				self.pipeArr[i] && self.pipeArr[i].render();
 			}
 			//渲染小鸟
 			self.bird.render();
 			self.bird.update();
+			
+			//打印分数
+			var scoreStr = self.score.toString();
+			var scoreLength = scoreStr.length;
+			
+			for(var i = 0; i < scoreLength; i++){
+				self.ctx.drawImage(self.R["shuzi" + scoreStr.charAt(i)], self.canvas.width / 2 - (scoreLength / 2 * 24) + 24 * i, 100);
+			}
+			
+			//var len = 2;
+			//self.ctx.drawImage(self.R["shuzi1"], self.canvas.width / 2 - (len / 2 * 34), 100);
+			//self.ctx.drawImage(self.R["shuzi0"], self.canvas.width / 2 - (len / 2 * 34) + 24, 100);
+			
 			
 
 			//打印帧编号
