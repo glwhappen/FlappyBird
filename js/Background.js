@@ -3,7 +3,7 @@
 		//自己的背景
 		this.image = Game.R.bg_day;
 		//自己的y
-		this.y = 0.75 * Game.canvas.height - 396;
+		this.y = Game.landScale * Game.canvas.height - 396;
 		//Game.ctx.drawImage(this.image, 100, 100);
 		this.x = 0;
 		

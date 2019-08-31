@@ -8,6 +8,9 @@
 		this.Rjsonurl = params.Rjsonurl; 
 		//帧编号
 		this.fno = 0;
+		//大地占屏幕比例
+		this.landScale = 0.8;
+		
 		//设置画布的宽度和高度
 		this.init();
 		
@@ -88,8 +91,8 @@
 		//实例化大地
 		this.land = new Land();
 		
-		//实例化管子
-		this.pipe = new Pipe();
+		//管子数组，定时器每间隔150帧都要实例化管子
+		this.pipeArr = new Array();
 		
 		var self = this;
 		this.timer = setInterval(function(){
@@ -106,10 +109,15 @@
 			self.land.update();
 			//渲染大地
 			self.land.render();
-			//更新管子
-			self.pipe.update();
-			//渲染管子
-			self.pipe.render();
+			if(self.fno % 150 == 0)
+			{
+				new Pipe();
+			}
+			for(var i = 0; i < self.pipeArr.length; i++){
+				self.pipeArr[i].update();
+				self.pipeArr[i].render();
+			}
+			
 
 			//打印帧编号
 			self.ctx.save();

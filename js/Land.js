@@ -3,7 +3,7 @@
 		//自己的背景
 		this.image = Game.R.land;
 		
-		this.y = Game.canvas.height * 0.75;
+		this.y = Game.canvas.height * Game.landScale;
 		this.x = 0;
 		
 	}

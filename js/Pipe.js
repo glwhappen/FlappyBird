@@ -1,7 +1,7 @@
 (function(){
 	var Pipe = window.Pipe = function(){
-		this.imageDown = Game.R["Pipe_down"];
-		this.imageUp = Game.R["Pipe_up"];
+		this.imageDown = Game.R["pipe_down"];
+		this.imageUp = Game.R["pipe_up"];
 		
 		//管子的位置
 		this.x = Game.canvas.width;
@@ -11,10 +11,12 @@
 		this.height1 = 100 + parseInt(Math.random() * 221);
 		
 		//空隙
-		this.interspace = 120;
+		this.interspace = 160;
 		//下面管子的高就可以算出来了
-		this.height2 = Game.canvas.height * 0.75 - this.height1 - this.interspace;
+		this.height2 = Game.canvas.height * Game.landScale - this.height1 - this.interspace;
 		
+		//将自己放入数组
+		Game.pipeArr.push(this);
 	}
 	Pipe.prototype.update = function(){
 		this.x -= 2;
