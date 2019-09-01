@@ -47,6 +47,9 @@
 	
 	{"name" : "text_game_over", "url" : "img/text_game_over.png"},
 	
+	{"name" : "button_pause", "url" : "img/button_pause.png"},
+	{"name" : "button_resume", "url" : "img/button_resume.png"},
+	
 	{"name" : "logo", "url" : "img/title.png"}
 	]
 }

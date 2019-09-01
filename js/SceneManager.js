@@ -35,6 +35,10 @@
 				}
 				break;
 			case 3:
+				if(this.isPause){
+					Game.fno--
+					break;
+				}
 				this.bird.update();
 				//背景更新
 				this.bg.update();
@@ -85,6 +89,7 @@
 				
 				Game.ctx.drawImage(Game.R["logo"], Game.canvas.width / 2 - Game.R["logo"].width / 2, this.logoY);
 				Game.ctx.drawImage(Game.R["button_play"], this.button_playX, this.button_playY);
+				
 				break;
 			case 2:
 				this.bg.render();
@@ -123,6 +128,13 @@
 					Game.ctx.drawImage(Game.R["shuzi" + scoreStr.charAt(i)], Game.canvas.width / 2 - (scoreLength / 2 * 24) + 24 * i, 100);
 				}
 				
+				//渲染暂停按钮
+				if(this.isPause){
+					Game.ctx.drawImage(Game.R["button_resume"],this.button_pauseX, this.button_pauseY);				
+				} else {
+					Game.ctx.drawImage(Game.R["button_pause"],this.button_pauseX, this.button_pauseY);
+				}
+
 				break;
 			case 4:
 				//渲染背景
@@ -226,6 +238,11 @@
 				this.firstClick = false;
 				//负责处理管子数组:清空
 				Game.pipeArr = new Array();
+				//是否暂停游戏
+				this.isPause = false;
+				//暂停按钮初始化
+				this.button_pauseX = Game.canvas.width - Game.R["button_pause"].width - 10;
+				this.button_pauseY = 10;
 				break;
 			case 4:
 				// 死亡动画
@@ -272,7 +289,20 @@
 					self.enter(3);
 					break;
 				case 3:
-					self.bird.fly();
+					//如果游戏状态本身是暂停状态，只要点击屏幕任意位置，都会开始游戏
+					if(self.isPause || mousex > self.button_pauseX && mousey < self.button_pauseY + Game.R["button_pause"].height){
+						//如果暂停按钮被点击了
+						if(self.isPause){
+							self.isPause = false;
+							self.bird.fly();
+						} else {
+							self.isPause = true;
+						}
+					}
+					else {
+						self.bird.fly();
+					}
+					
 					break;
 				case 5:
 					self.enter(1);
