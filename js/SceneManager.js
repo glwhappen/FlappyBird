@@ -6,30 +6,24 @@
 		this.bg = new Background();
 		this.bird = new Bird();
 		this.land = new Land();
-		Game.bird = this.bird;
 		
-		//logo的y值
-		this.logoY = -48;
-		
-		//button_play的y值
-		this.button_playY = Game.canvas.height;
-		this.button_playX = Game.canvas.width / 2 - Game.R["button_play"].width / 2;
-		
+	
 		//添加监听
 		this.bindEvent();
+		this.enter(this.sceneNumber);
 		
 	}
 	SceneManager.prototype.update = function(){
 		switch(this.sceneNumber){
 			case 1:
 				this.logoY++;
-				if(this.logoY > 120){
+				if(this.logoY > this.logoYEnd){
 					
-					this.logoY = 120;
+					this.logoY = this.logoYEnd;
 				}
-				this.button_playY -= 2;
-				if(this.button_playY < Game.canvas.height - 336){
-					this.button_playY = Game.canvas.height - 336;
+				this.button_playY -= this.button_playSpeed;
+				if(this.button_playY < this.button_playYEnd){
+					this.button_playY = this.button_playYEnd;
 				}
 				break;
 			case 2:
@@ -83,11 +77,10 @@
 				this.bg.render();
 				//this.land.render();
 				
-				if(this.logoY == 120){
+				if(this.logoY == this.logoYEnd){
 					//渲染小鸟
 					this.bird.render();
-					this.bird.x = Game.canvas.width / 2;
-					this.bird.y = 300;
+
 				}
 				
 				Game.ctx.drawImage(Game.R["logo"], Game.canvas.width / 2 - Game.R["logo"].width / 2, this.logoY);
@@ -100,7 +93,7 @@
 				//画教程
 				Game.ctx.save();
 				Game.ctx.globalAlpha = this.tutorialOpacity;
-				Game.ctx.drawImage(Game.R["tutorial"], Game.canvas.width / 2 - Game.R["tutorial"].width / 2, this.button_playY);
+				Game.ctx.drawImage(Game.R["tutorial"], Game.canvas.width / 2 - Game.R["tutorial"].width / 2, this.bird.y - Game.R["tutorial"].height + 24);//this.button_playY
 				
 				Game.ctx.restore();
 				break;
@@ -205,9 +198,25 @@
 		switch(this.sceneNumber){
 			case 1:
 				//进入1号场景一瞬间要做的事情
-				this.bird = new Bird();
+				
+				//按钮与logo的速度倍数
+				this.button_playSpeed = 1.5;
+				
+				//logo的y值
 				this.logoY = -48;
+				this.logoYEnd = Game.canvas.height * 0.182;
+				
+				//button_play的y值
 				this.button_playY = Game.canvas.height;
+				this.button_playX = Game.canvas.width / 2 - Game.R["button_play"].width / 2;
+				this.button_playYEnd = Game.canvas.height - (this.logoYEnd - this.logoY) * this.button_playSpeed;
+				
+				this.bird = new Bird();
+				this.bird.x = Game.canvas.width / 2;
+				this.bird.y = (this.logoYEnd + Game.R["logo"].height + this.button_playYEnd) / 2;
+				Game.bird = this.bird;
+				
+		
 				break;
 			case 2:
 				this.tutorialOpacity = 1;
@@ -243,14 +252,14 @@
 			//点击按钮 点击的时候判断是第几个场景
 			switch(self.sceneNumber){
 				case 1:
-					if(self.button_playY == Game.canvas.height - 336 && mousex > self.button_playX && mousex < self.button_playX + Game.R["button_play"].width && mousey > self.button_playY && mousey < self.button_playY + Game.R["button_play"].height){
+					if(self.button_playY == self.button_playYEnd && mousex > self.button_playX && mousex < self.button_playX + Game.R["button_play"].width && mousey > self.button_playY && mousey < self.button_playY + Game.R["button_play"].height){
 						//Game.canvas.style.cursor = "posinter";
 						console.log("你点了play");
 						self.enter(2);
 					} else {
 						//点击了空白处，快速开始游戏
-						self.logoY = 120;
-						self.button_playY = Game.canvas.height - 336;
+						self.logoY = self.logoYEnd;
+						self.button_playY = self.button_playYEnd;
 					}
 					break;
 				case 2:

@@ -38,8 +38,8 @@
 		
 		if(windowH > 736){
 			windowH = 736;
-		} else if(windowH < 662){
-			windowH = 662;
+		} else if(windowH < 500){
+			windowH = 500;
 		}
 		//让canvas适配
 		this.canvas.width = windowW;
