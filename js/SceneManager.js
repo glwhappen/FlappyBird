@@ -247,8 +247,14 @@
 	SceneManager.prototype.bindEvent = function(number){
 		var self = this;
 		Game.canvas.onclick = function(event){
-			var mousex = event.clientX;
-			var mousey = event.clientY;
+			clickHandler(event.clientX, event.clientY);
+		};
+		Game.canvas.addEventListener("touchstart", function(event){
+			event.preventDefault();
+			var finger = event.touches[0];
+			clickHandler(finger.clientX, finger.clientY);
+		}, true);
+		function clickHandler(mousex, mousey){
 			//点击按钮 点击的时候判断是第几个场景
 			switch(self.sceneNumber){
 				case 1:
